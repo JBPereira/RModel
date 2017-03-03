@@ -37,7 +37,7 @@ class RevenueFitter():
         opt_params = []
 
         for i in range(number_of_seeds):
-
+            print opt_params
             print float(i)/number_of_seeds * 100
 
             window_time = random.randint(*bounds[0])
@@ -45,7 +45,7 @@ class RevenueFitter():
             time_pars.append(window_time)
             spend_pars = [self.rd(*bounds[sp]) for sp in range(4, 6)]
             spend_pars.append(window_time)
-            revenue_max = self.rd(*bounds[5])
+            revenue_max = self.rd(*bounds[6])
 
             iteration_distance = self.function_to_minimize(real_revenue, spend_pars, time_pars, revenue_max, window_time, spend_array)
             if iteration_distance < min_distance:
@@ -61,10 +61,10 @@ class RevenueFitter():
 if __name__ == "__main__":
     spend_array = [10, 14, 20, 12, 5, 10, 20, 10, 0,
                    14, 18, 3, 0, 19, 20, 12, 3, 0, 14, 15, 20, 13,
-                   12, 15, 0, 18, 20, 18, 14, 5, 9, 10, 15]
-    actual_revenue = [1, 1.3, 3, 4, 3.45, 5, 4.5, 8, 6.73,
-                   5.45, 5.89, 8.45, 7.45, 5.3, 6.7, 8.6, 10, 10.35, 8.32, 7.56, 8.56, 9.56,
-                   10.34, 10.78, 11.23, 9.34, 12, 12.3, 12.12, 11.2, 9.2, 8.7, 10]
+                   12, 15, 0]
+    actual_revenue = [100, 130, 300, 400, 345, 500, 450, 800, 673,
+                   545, 589, 845, 745, 530, 670, 860, 1000, 1035, 832, 756, 856, 956,
+                   1034, 1078, 1123]
     RF = RevenueFitter()
-    pars = RF.fit_parameters(actual_revenue, spend_array, 1000)
+    pars = RF.fit_parameters(actual_revenue, spend_array, 500)
     print pars

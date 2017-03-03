@@ -27,7 +27,7 @@ class RevenueModel():
             revenue_response /= self.window_time
             lower_bound = current_day-t-self.window_time
             upper_bound = current_day-t+1
-            time_response = itg.quad(time_model.time_function, lower_bound, upper_bound)
+            time_response = itg.quad(time_model.time_function, lower_bound, upper_bound, limit = 150)
 
             expected_revenue += revenue_response*time_response[0]
 
