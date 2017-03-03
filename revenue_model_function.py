@@ -20,11 +20,11 @@ class RevenueModel():
         expected_revenue = 0
         current_day = len(spend_array)
 
-        for t in range(window_time-1, current_day):
+        for t in range(self.window_time-1, current_day):
             revenue_response = 0
-            for s_window in range(t-window_time, t):
+            for s_window in range(t-self.window_time, t):
                 revenue_response += SpendFunction.calculate_spend_resp(spend_array[s_window], self.spend_pars)
-            revenue_response /= window_time
+            revenue_response /= self.window_time
             lower_bound = current_day-t-self.window_time
             upper_bound = current_day-t+1
             time_response = itg.quad(time_model.time_function, lower_bound, upper_bound)
