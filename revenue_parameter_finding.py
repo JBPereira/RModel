@@ -32,6 +32,12 @@ class RevenueFitter():
         return total_revenue_difference
 
     def fit_parameters(self, real_revenue, spend_array, number_of_seeds):
+        
+        """
+        Fits parameters by minimizing loss and searching the space randomly. 
+        To be improved, use gradient to climb random seeds.
+        """
+        
         bounds = [[1,3], [0.01, 7], [0.01, 7], [0.01, 7], [1, 40], [0.01, 5], [10, 10000]]
         min_distance = scipy.inf
         opt_params = []
@@ -56,7 +62,12 @@ class RevenueFitter():
 
     @staticmethod
     def rd(lb, ub):
-        return lb + random.random()*ub
+        """
+        Returns random value in the specified range 
+        :param lb: Lower bound for the desired range
+        :param ub: Upper boun for the desired range
+        """
+        return lb + random.random()* (ub -lb) 
 
 if __name__ == "__main__":
     spend_array = [10, 14, 20, 12, 5, 10, 20, 10, 0,
